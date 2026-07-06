@@ -1,5 +1,9 @@
 # darija-tools
 
+[![CI](https://github.com/Samielakkad/darija-tools/actions/workflows/ci.yml/badge.svg)](https://github.com/Samielakkad/darija-tools/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 Small, honest NLP utilities for Moroccan Darija (الدارجة). Built out of the text-normalization and transliteration code I kept re-writing while shipping [jak.ma](https://jak.ma), a live Darija service marketplace.
 
 Darija is the everyday language of ~37M people but is under-served by mainstream Arabic NLP, which targets Modern Standard Arabic. This is the small, dependency-free layer that comes up first in almost any Darija pipeline.
