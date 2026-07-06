@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "darija-tools"
+version = "0.1.0"
+description = "Small, honest NLP utilities for Moroccan Darija: normalization and Arabizi transliteration."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Sami El Akkad" }]
+keywords = ["darija", "moroccan-arabic", "arabic", "nlp", "transliteration", "arabizi"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Text Processing :: Linguistic",
+  "Natural Language :: Arabic",
+]
+
+[project.urls]
+Homepage = "https://github.com/Samielakkad/darija-tools"
+Issues = "https://github.com/Samielakkad/darija-tools/issues"
+
+[project.scripts]
+darija = "darija_tools.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+darija_tools = ["data/*.json"]
