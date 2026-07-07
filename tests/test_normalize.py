@@ -24,3 +24,21 @@ def test_is_idempotent():
 
 def test_latin_passes_through():
     assert normalize("Casa 2026") == "Casa 2026"
+
+
+def test_digits_are_kept_by_default():
+    # Arabic-Indic digits survive unless normalize_digits is asked for.
+    assert normalize("٢٠٢٦") == "٢٠٢٦"
+
+
+def test_normalize_arabic_indic_digits():
+    assert normalize("٢٠٢٦", normalize_digits=True) == "2026"
+
+
+def test_normalize_extended_arabic_indic_digits():
+    # Extended Arabic-Indic (Persian) range U+06F0-06F9.
+    assert normalize("۰۱۲۳۴۵۶۷۸۹", normalize_digits=True) == "0123456789"
+
+
+def test_normalize_digits_leaves_ascii_and_letters():
+    assert normalize("طريق ٧ km", normalize_digits=True) == "طريق 7 km"
