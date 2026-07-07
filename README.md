@@ -32,6 +32,13 @@ Collapse the orthographic noise that makes Arabic-script matching brittle — di
 'الاحمر'
 ```
 
+Digit folding is opt-in — Arabic-Indic (`٠-٩`) and Persian (`۰-۹`) digits map to ASCII only when you ask, since NFKC leaves them alone:
+
+```python
+>>> normalize("طريق ٧", normalize_digits=True)
+'طريق 7'
+```
+
 ### Arabizi transliteration
 
 Latin-script Darija (`3lach`, `bghit`, `wach`) → Arabic script. A curated lexicon of high-frequency words is applied first, then a transparent rule table handles the long tail.
