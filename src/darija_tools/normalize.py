@@ -16,6 +16,9 @@ _DIACRITICS = re.compile(
 )
 _TATWEEL = "ـ"  # ـ
 
+# Runs of any Unicode whitespace (spaces, tabs, newlines, NBSP, etc.).
+_WHITESPACE = re.compile(r"\s+")
+
 # Fold common letter variants to a single canonical form.
 _LETTER_UNIFY = {
     "آ": "ا",  # آ -> ا
@@ -43,6 +46,7 @@ def normalize(
     strip_tatweel: bool = True,
     unify_letters: bool = True,
     normalize_digits: bool = False,
+    collapse_whitespace: bool = False,
     form: str = "NFKC",
 ) -> str:
     """Return a normalized copy of ``text``.
@@ -55,6 +59,9 @@ def normalize(
         normalize_digits: fold Arabic-Indic and Extended Arabic-Indic (Persian)
             digits to ASCII 0-9. Off by default since it changes the digit
             script; NFKC does not do this on its own.
+        collapse_whitespace: collapse every run of whitespace (spaces, tabs,
+            newlines, non-breaking spaces, ...) to a single ASCII space and
+            strip leading/trailing whitespace. Off by default.
         form: Unicode normalization form applied first (default ``"NFKC"``);
             pass a falsy value to skip it.
 
@@ -71,4 +78,6 @@ def normalize(
         text = text.translate(_UNIFY_TABLE)
     if normalize_digits:
         text = text.translate(_DIGITS_TABLE)
+    if collapse_whitespace:
+        text = _WHITESPACE.sub(" ", text).strip()
     return text
