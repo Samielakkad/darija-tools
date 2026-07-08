@@ -28,3 +28,21 @@ def test_separators_preserved():
 
 def test_sentence():
     assert to_arabic("3lach bghiti daba") == "علاش بغيتي دبا"
+
+
+def test_highfreq_lexicon_batch():
+    # High-frequency words the char/digraph rules get wrong on their own:
+    # `e` would insert a spurious ي, `3t` can't infer ط over ت, and a
+    # trailing `-a` on these nouns is ة, not ا. The lexicon corrects them.
+    assert to_arabic("sme3") == "سمع"
+    assert to_arabic("3ti") == "عطي"
+    assert to_arabic("3tini") == "عطيني"
+    assert to_arabic("meskin") == "مسكين"
+    assert to_arabic("meskina") == "مسكينة"
+    assert to_arabic("khdma") == "خدمة"
+    assert to_arabic("khedma") == "خدمة"
+
+
+def test_highfreq_batch_is_case_insensitive():
+    # Lexicon lookup lowercases first, so caps still resolve.
+    assert to_arabic("Meskina") == "مسكينة"
