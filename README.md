@@ -49,6 +49,17 @@ Latin-script Darija (`3lach`, `bghit`, `wach`) → Arabic script. A curated lexi
 'علاش بغيتي دبا'
 ```
 
+Code-switched loanwords (French/English words Darija speakers keep in Latin) otherwise get mangled character-by-character. Opt in to `keep_loanwords=True` to leave a curated set of them untouched:
+
+```python
+>>> to_arabic("bghit taxi")                       # default: char rules mangle it
+'بغيت تاكسي'
+>>> to_arabic("bghit taxi", keep_loanwords=True)  # loanword left in Latin
+'بغيت taxi'
+```
+
+The loanword set is small and non-exhaustive by design; off by default so existing behaviour is unchanged.
+
 ### CLI
 
 ```bash
@@ -59,13 +70,13 @@ $ echo "3lach bghiti daba" | darija translit
 ## Honest limitations
 
 - Arabizi spelling is **not standardized** — the same word has many spellings. The transliterator targets common cases, not perfection. It is a rule-based v0, not a neural model.
-- **Loanwords are not detected.** French/English words common in Darija text (`plombier`, `weekend`) get run through the same rules and will need review. Loanword pass-through is on the roadmap.
+- **Loanword coverage is partial.** `keep_loanwords=True` leaves a curated set of common French/English loanwords (`taxi`, `weekend`, `internet`, …) in Latin, but the set is small and non-exhaustive — anything outside it still runs through the rules and will need review.
 - Coverage is Moroccan Darija first; other Maghrebi dialects overlap but aren't the target.
 
 ## Roadmap
 
 - Grow the Arabizi lexicon (community-verifiable, one batch at a time)
-- Loanword detection / pass-through
+- Grow the loanword set (`keep_loanwords` shipped; set is still small)
 - Reverse transliteration (Arabic → Arabizi)
 - Trade / city tagging for service-marketplace text
 - Optional neural fallback for long-tail transliteration

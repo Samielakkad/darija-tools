@@ -46,3 +46,31 @@ def test_highfreq_lexicon_batch():
 def test_highfreq_batch_is_case_insensitive():
     # Lexicon lookup lowercases first, so caps still resolve.
     assert to_arabic("Meskina") == "مسكينة"
+
+
+def test_keep_loanwords_off_by_default():
+    # Default behaviour unchanged: loanwords still get char-mangled.
+    assert to_arabic("taxi") == "تاكسي"
+    assert to_arabic("weekend") == "وييكيند"
+
+
+def test_keep_loanwords_leaves_latin():
+    assert to_arabic("taxi", keep_loanwords=True) == "taxi"
+    assert to_arabic("weekend", keep_loanwords=True) == "weekend"
+    assert to_arabic("internet", keep_loanwords=True) == "internet"
+
+
+def test_keep_loanwords_is_case_insensitive():
+    # Match lowercases, but the original casing is preserved in the output.
+    assert to_arabic("WiFi", keep_loanwords=True) == "WiFi"
+    assert to_arabic("Facebook", keep_loanwords=True) == "Facebook"
+
+
+def test_keep_loanwords_in_sentence():
+    # Darija words transliterate; the loanword stays Latin. Separators kept.
+    assert to_arabic("bghit taxi", keep_loanwords=True) == "بغيت taxi"
+
+
+def test_keep_loanwords_does_not_touch_non_loanwords():
+    # A non-loanword is transliterated as usual even with the flag on.
+    assert to_arabic("bghit", keep_loanwords=True) == "بغيت"
