@@ -53,7 +53,18 @@ def _load_lexicon() -> dict:
         return json.load(fh)
 
 
+def _load_loanwords() -> frozenset[str]:
+    src = resources.files("darija_tools.data").joinpath("loanwords.json")
+    with src.open(encoding="utf-8") as fh:
+        return frozenset(w.lower() for w in json.load(fh))
+
+
 _LEXICON = _load_lexicon()
+
+# French / English loanwords that Darija speakers commonly write in Latin
+# script inside otherwise-Arabizi text (e.g. "taxi", "weekend", "internet").
+# Small and non-exhaustive by design -- see `keep_loanwords` in `to_arabic`.
+_LOANWORDS = _load_loanwords()
 
 
 def _map_word(word: str) -> str:
@@ -75,13 +86,25 @@ def _map_word(word: str) -> str:
     return "".join(out)
 
 
-def to_arabic(text: str) -> str:
+def to_arabic(text: str, *, keep_loanwords: bool = False) -> str:
     """Transliterate Arabizi (Latin-script Darija) to Arabic script.
 
     Word tokens are mapped via the lexicon then the rule table; runs of
     separators (spaces, punctuation) are preserved unchanged.
+
+    When ``keep_loanwords`` is True, tokens that match the curated loanword
+    set (French/English words Darija speakers keep in Latin, e.g. "taxi",
+    "weekend") are left untouched instead of being transliterated
+    character-by-character into garbled Arabic. Off by default so existing
+    behaviour is unchanged. The set is small and non-exhaustive.
     """
     return "".join(
-        _map_word(tok) if tok[:1].isalnum() else tok
+        _render_token(tok, keep_loanwords) if tok[:1].isalnum() else tok
         for tok in _TOKEN.findall(text)
     )
+
+
+def _render_token(word: str, keep_loanwords: bool) -> str:
+    if keep_loanwords and word.lower() in _LOANWORDS:
+        return word
+    return _map_word(word)
