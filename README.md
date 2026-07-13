@@ -1,5 +1,7 @@
 # darija-tools
 
+![darija-tools converts Moroccan Darija Arabizi into Arabic script](assets/social-preview.png)
+
 [![CI](https://github.com/Samielakkad/darija-tools/actions/workflows/ci.yml/badge.svg)](https://github.com/Samielakkad/darija-tools/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
