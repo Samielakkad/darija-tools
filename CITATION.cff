@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use darija-tools in research, please cite this software."
+title: "darija-tools"
+type: software
+authors:
+  - family-names: "El Akkad"
+    given-names: "Sami"
+version: 0.1.0
+license: MIT
+repository-code: "https://github.com/Samielakkad/darija-tools"
+url: "https://github.com/Samielakkad/darija-tools"
+keywords:
+  - Darija
+  - Moroccan Arabic
+  - NLP
+  - transliteration
+  - normalization

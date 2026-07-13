@@ -1,0 +1,26 @@
+name: Feature request
+description: Propose a focused, testable addition.
+title: "feat: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What real Darija NLP workflow is blocked today?
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Proposed behavior
+      description: Include example inputs, outputs, and compatibility expectations.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Language evidence
+      description: Cite a corpus, publication, dictionary, or concrete usage examples when language rules are involved.
+    validations:
+      required: true

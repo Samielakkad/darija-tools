@@ -1,0 +1,34 @@
+name: Bug report
+description: Report a reproducible normalization, transliteration, packaging, or CLI defect.
+title: "bug: "
+labels: [bug]
+body:
+  - type: textarea
+    id: input
+    attributes:
+      label: Input and command
+      description: Include the exact Python input or CLI command.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual output
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected output and evidence
+      description: Explain the expected Darija form and cite a source or usage context when relevant.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: darija-tools and Python versions
+      placeholder: darija-tools 0.1.0, Python 3.12
+    validations:
+      required: true

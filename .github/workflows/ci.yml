@@ -52,6 +52,13 @@ jobs:
           python-version: "3.13"
           cache: pip
       - name: Install build frontend
-        run: python -m pip install build
+        run: python -m pip install build twine
       - name: Build source and wheel distributions
         run: python -m build
+      - name: Validate package metadata
+        run: python -m twine check dist/*
+      - name: Install and smoke-test the wheel
+        run: |
+          python -m pip install --force-reinstall dist/*.whl
+          darija --version
+          darija translit "3lach bghiti daba"

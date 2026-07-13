@@ -13,7 +13,15 @@ license-files = ["LICENSE"]
 authors = [{ name = "Sami El Akkad" }]
 keywords = ["darija", "moroccan-arabic", "arabic", "nlp", "transliteration", "arabizi"]
 classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
   "Topic :: Text Processing :: Linguistic",
   "Natural Language :: Arabic",
 ]
@@ -23,11 +31,15 @@ dev = [
   "build>=1.2",
   "pytest>=8,<9",
   "ruff>=0.11",
+  "twine>=6,<7",
 ]
 
 [project.urls]
 Homepage = "https://github.com/Samielakkad/darija-tools"
+Source = "https://github.com/Samielakkad/darija-tools"
 Issues = "https://github.com/Samielakkad/darija-tools/issues"
+Changelog = "https://github.com/Samielakkad/darija-tools/blob/main/CHANGELOG.md"
+Documentation = "https://github.com/Samielakkad/darija-tools#readme"
 
 [project.scripts]
 darija = "darija_tools.cli:main"
@@ -36,4 +48,4 @@ darija = "darija_tools.cli:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-darija_tools = ["data/*.json"]
+darija_tools = ["data/*.json", "py.typed"]

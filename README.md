@@ -12,7 +12,7 @@ Darija is the everyday language of ~37M people but is under-served by mainstream
 
 ## Install
 
-From source (PyPI release planned):
+The first PyPI release is being prepared through a token-free trusted-publishing workflow. Until it is live, install from source:
 
 ```bash
 git clone https://github.com/Samielakkad/darija-tools
@@ -29,6 +29,7 @@ pip install -e ".[dev]"
 python -m ruff check src tests
 python -m pytest -q
 python -m build
+python -m twine check dist/*
 ```
 
 ## What's in it
@@ -90,6 +91,17 @@ under `translit`. They remain off by default to preserve the library defaults.
 - **Loanword coverage is partial.** `keep_loanwords=True` leaves a curated set of common French/English loanwords (`taxi`, `weekend`, `internet`, …) in Latin, but the set is small and non-exhaustive — anything outside it still runs through the rules and will need review.
 - Coverage is Moroccan Darija first; other Maghrebi dialects overlap but aren't the target.
 
+## Reproducibility
+
+- CI runs linting and the full test suite on Python 3.9 through 3.13.
+- Every build produces both a source distribution and a wheel, validates their metadata, installs the wheel, and smoke-tests the CLI.
+- The package has no runtime dependencies and makes no network requests.
+- Lexicon and rule contributions must include language evidence and regression tests; see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Contributing and citing
+
+Focused issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before changing rules or language data. Security reports follow [SECURITY.md](SECURITY.md), releases are documented in [CHANGELOG.md](CHANGELOG.md), and research citation metadata lives in [CITATION.cff](CITATION.cff).
+
 ## Roadmap
 
 - Grow the Arabizi lexicon (community-verifiable, one batch at a time)
@@ -97,7 +109,7 @@ under `translit`. They remain off by default to preserve the library defaults.
 - Reverse transliteration (Arabic → Arabizi)
 - Trade / city tagging for service-marketplace text
 - Optional neural fallback for long-tail transliteration
-- PyPI release
+- Versioned PyPI releases
 
 ## License
 
