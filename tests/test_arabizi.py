@@ -48,6 +48,30 @@ def test_highfreq_batch_is_case_insensitive():
     assert to_arabic("Meskina") == "مسكينة"
 
 
+def test_darija_lexicon_batch():
+    # These forms need lexical context: the fallback cannot infer ة, omitted
+    # vowels, or the conventional spelling of common nouns and phrases.
+    expected = {
+        "bslama": "بسلامة",
+        "sahbi": "صاحبي",
+        "chokran": "شكرا",
+        "shokran": "شكرا",
+        "zwina": "زوينة",
+        "9hwa": "قهوة",
+        "9ahwa": "قهوة",
+        "qahwa": "قهوة",
+        "bent": "بنت",
+        "weld": "ولد",
+        "rajel": "راجل",
+    }
+    for arabizi, arabic in expected.items():
+        assert to_arabic(arabizi) == arabic
+
+
+def test_darija_lexicon_batch_is_case_insensitive():
+    assert to_arabic("BSLAMA SAHBI CHOKRAN ZWINA") == "بسلامة صاحبي شكرا زوينة"
+
+
 def test_keep_loanwords_off_by_default():
     # Default behaviour unchanged: loanwords still get char-mangled.
     assert to_arabic("taxi") == "تاكسي"
