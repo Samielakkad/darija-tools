@@ -20,6 +20,15 @@ pip install -e .
 
 Pure Python, no runtime dependencies.
 
+For development, install the checked-in toolchain and run the same checks as CI:
+
+```bash
+pip install -e ".[dev]"
+python -m ruff check src tests
+python -m pytest -q
+python -m build
+```
+
 ## What's in it
 
 ### Normalization
