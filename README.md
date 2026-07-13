@@ -64,8 +64,14 @@ The loanword set is small and non-exhaustive by design; off by default so existi
 
 ```bash
 $ darija normalize "الأَحْمَر"
+$ darija normalize --normalize-digits --collapse-whitespace "  طريق ٧  "
+$ darija translit --keep-loanwords "bghit taxi"
 $ echo "3lach bghiti daba" | darija translit
 ```
+
+All three optional library behaviours are available in the CLI: digit folding
+and whitespace collapsing under `normalize`, and curated loanword preservation
+under `translit`. They remain off by default to preserve the library defaults.
 
 ## Honest limitations
 
