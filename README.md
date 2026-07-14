@@ -12,6 +12,13 @@ Darija is the everyday language of ~37M people but is under-served by mainstream
 
 Live GitHub API card: <https://samielakkad.github.io/darija-tools-github-card/>
 
+## Why use it
+
+- **Tiny surface area:** two focused primitives, `normalize()` and `to_arabic()`.
+- **No runtime dependencies:** easy to drop into scripts, notebooks, bots, and data-cleaning jobs.
+- **Darija-first defaults:** targets Moroccan Arabizi and Arabic-script cleanup instead of treating Darija as generic Arabic.
+- **Transparent rules:** lexicon and rule changes are reviewable, testable, and easy to improve.
+
 ## Install
 
 Install the v0.1.0 wheel directly from the GitHub release:
