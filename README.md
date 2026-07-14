@@ -12,7 +12,13 @@ Darija is the everyday language of ~37M people but is under-served by mainstream
 
 ## Install
 
-The first PyPI release is being prepared through a token-free trusted-publishing workflow. Until it is live, install from source:
+Install the v0.1.0 wheel directly from the GitHub release:
+
+```bash
+pip install https://github.com/Samielakkad/darija-tools/releases/download/v0.1.0/darija_tools-0.1.0-py3-none-any.whl
+```
+
+Or install the latest development version from source:
 
 ```bash
 git clone https://github.com/Samielakkad/darija-tools
