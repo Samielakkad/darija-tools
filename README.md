@@ -10,6 +10,8 @@ Small, honest NLP utilities for Moroccan Darija (الدارجة). Built out of t
 
 Darija is the everyday language of ~37M people but is under-served by mainstream Arabic NLP, which targets Modern Standard Arabic. This is the small, dependency-free layer that comes up first in almost any Darija pipeline.
 
+Live GitHub API card: <https://samielakkad.github.io/darija-tools-github-card/>
+
 ## Install
 
 Install the v0.1.0 wheel directly from the GitHub release:
