@@ -95,6 +95,16 @@ def test_keep_loanwords_in_sentence():
     assert to_arabic("bghit taxi", keep_loanwords=True) == "بغيت taxi"
 
 
+def test_keep_loanwords_covers_common_code_switched_terms():
+    terms = (
+        "abonnement agenda ambulance appartement ascenseur autoroute bureau "
+        "cadeau camera chantier chauffeur cinema clinique diplome ecole facture "
+        "garage groupe imprimante logiciel machine pharmacie probleme programme "
+        "projet quartier radio reunion service station"
+    )
+    assert to_arabic(terms, keep_loanwords=True) == terms
+
+
 def test_keep_loanwords_does_not_touch_non_loanwords():
     # A non-loanword is transliterated as usual even with the flag on.
     assert to_arabic("bghit", keep_loanwords=True) == "بغيت"
