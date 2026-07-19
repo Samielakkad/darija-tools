@@ -72,6 +72,35 @@ def test_darija_lexicon_batch_is_case_insensitive():
     assert to_arabic("BSLAMA SAHBI CHOKRAN ZWINA") == "بسلامة صاحبي شكرا زوينة"
 
 
+def test_extended_darija_lexicon_batch():
+    expected = {
+        "khoya": "خويا",
+        "khouya": "خويا",
+        "khti": "ختي",
+        "khout": "خوت",
+        "dar": "دار",
+        "darna": "دارنا",
+        "mdina": "مدينة",
+        "blad": "بلاد",
+        "sou9": "سوق",
+        "lyoum": "اليوم",
+        "ghdda": "غدا",
+        "sba7": "صباح",
+        "lil": "ليل",
+        "nhar": "نهار",
+        "kbir": "كبير",
+        "sghir": "صغير",
+        "zwin": "زوين",
+        "zwine": "زوين",
+        "m3ak": "معاك",
+        "m3ana": "معانا",
+        "bghina": "بغينا",
+        "khass": "خاص",
+    }
+    for arabizi, arabic in expected.items():
+        assert to_arabic(arabizi) == arabic
+
+
 def test_keep_loanwords_off_by_default():
     # Default behaviour unchanged: loanwords still get char-mangled.
     assert to_arabic("taxi") == "تاكسي"
