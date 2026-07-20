@@ -105,6 +105,8 @@ def to_arabic(text: str, *, keep_loanwords: bool = False) -> str:
 
 
 def _render_token(word: str, keep_loanwords: bool) -> str:
+    if len(word) > 1 and word.isdecimal():
+        return word
     if keep_loanwords and word.lower() in _LOANWORDS:
         return word
     return _map_word(word)

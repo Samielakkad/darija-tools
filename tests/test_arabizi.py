@@ -12,6 +12,11 @@ def test_digit_letters():
     assert to_arabic("9") == "ق"
 
 
+def test_multi_digit_numeric_tokens_are_preserved():
+    assert to_arabic("2026") == "2026"
+    assert to_arabic("l3am 2026") == "لعام 2026"
+
+
 def test_digraphs():
     assert to_arabic("kh") == "خ"
     assert to_arabic("gh") == "غ"
