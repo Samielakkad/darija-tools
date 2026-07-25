@@ -45,6 +45,60 @@ _SINGLE = {
 }
 
 _TOKEN = re.compile(r"[A-Za-z0-9]+|[^A-Za-z0-9]+")
+_ARABIC_LETTERS = r"\u0621-\u063a\u0641-\u064a\u0671-\u06d3\u0750-\u077f"
+_ARABIC_WORD = re.compile(rf"[{_ARABIC_LETTERS}]+")
+_ARABIC_TOKEN = re.compile(rf"[{_ARABIC_LETTERS}]+|[^{_ARABIC_LETTERS}]+")
+
+# Canonical, readable output for Arabic letters not covered by the word lexicon.
+# Arabic short vowels are usually unwritten, so reverse transliteration is also
+# lossy. The choices here favor common Moroccan Arabizi spellings.
+_ARABIC_SINGLE = {
+    "ء": "2",
+    "ؤ": "w",
+    "ئ": "y",
+    "أ": "a",
+    "إ": "i",
+    "آ": "a",
+    "ٱ": "a",
+    "ا": "a",
+    "ب": "b",
+    "ت": "t",
+    "ث": "th",
+    "ج": "j",
+    "چ": "ch",
+    "ح": "7",
+    "خ": "kh",
+    "د": "d",
+    "ذ": "dh",
+    "ر": "r",
+    "ز": "z",
+    "ژ": "j",
+    "س": "s",
+    "ش": "ch",
+    "ص": "s",
+    "ض": "d",
+    "ط": "6",
+    "ظ": "d",
+    "ع": "3",
+    "غ": "gh",
+    "ف": "f",
+    "ق": "9",
+    "ك": "k",
+    "ک": "k",
+    "ل": "l",
+    "م": "m",
+    "ن": "n",
+    "ه": "h",
+    "ة": "a",
+    "و": "w",
+    "ى": "a",
+    "ي": "y",
+    "پ": "p",
+    "ڤ": "v",
+    "گ": "g",
+    "ڭ": "g",
+    "ݣ": "g",
+}
 
 
 def _load_lexicon() -> dict:
@@ -60,6 +114,11 @@ def _load_loanwords() -> frozenset[str]:
 
 
 _LEXICON = _load_lexicon()
+_REVERSE_LEXICON = {}
+for _arabizi, _arabic in _LEXICON.items():
+    # JSON order defines the canonical spelling when several Arabizi spellings
+    # map to the same Arabic word (for example, wach/wash).
+    _REVERSE_LEXICON.setdefault(_arabic, _arabizi)
 
 # French / English loanwords that Darija speakers commonly write in Latin
 # script inside otherwise-Arabizi text (e.g. "taxi", "weekend", "internet").
@@ -110,3 +169,29 @@ def _render_token(word: str, keep_loanwords: bool) -> str:
     if keep_loanwords and word.lower() in _LOANWORDS:
         return word
     return _map_word(word)
+
+
+def to_arabizi(text: str) -> str:
+    """Transliterate Arabic-script Darija to a canonical Arabizi spelling.
+
+    Known words use the reverse of the curated lexicon. Unseen Arabic words use
+    a deterministic letter table. Punctuation, whitespace, numbers and existing
+    Latin text are preserved. Diacritics and tatweel are ignored.
+    """
+    from .normalize import normalize
+
+    text = normalize(text, unify_letters=False)
+    return "".join(
+        _map_arabic_word(token) if _starts_with_arabic(token) else token
+        for token in _ARABIC_TOKEN.findall(text)
+    )
+
+
+def _starts_with_arabic(token: str) -> bool:
+    return _ARABIC_WORD.fullmatch(token) is not None
+
+
+def _map_arabic_word(word: str) -> str:
+    if word in _REVERSE_LEXICON:
+        return _REVERSE_LEXICON[word]
+    return "".join(_ARABIC_SINGLE.get(char, char) for char in word)

@@ -1,4 +1,4 @@
-from darija_tools.arabizi import to_arabic
+from darija_tools.arabizi import to_arabic, to_arabizi
 
 
 def test_lexicon_hits():
@@ -142,3 +142,21 @@ def test_keep_loanwords_covers_common_code_switched_terms():
 def test_keep_loanwords_does_not_touch_non_loanwords():
     # A non-loanword is transliterated as usual even with the flag on.
     assert to_arabic("bghit", keep_loanwords=True) == "بغيت"
+
+
+def test_to_arabizi_uses_canonical_lexicon_spellings():
+    assert to_arabizi("علاش بغيتي دبا") == "3lach bghiti daba"
+
+
+def test_to_arabizi_falls_back_to_readable_letter_rules():
+    assert to_arabizi("حجر") == "7jr"
+    assert to_arabizi("قلب") == "9lb"
+    assert to_arabizi("ݣلس") == "gls"
+
+
+def test_to_arabizi_ignores_diacritics_and_keeps_separators():
+    assert to_arabizi("عَلاش؟ نعم!") == "3lach؟ n3m!"
+
+
+def test_to_arabizi_preserves_existing_latin_text():
+    assert to_arabizi("بغيت taxi") == "bghit taxi"

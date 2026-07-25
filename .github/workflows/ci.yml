@@ -22,7 +22,7 @@ jobs:
       - name: Install
         run: python -m pip install -e ".[dev]"
       - name: Lint
-        run: python -m ruff check src tests
+        run: python -m ruff check src tests evaluation
 
   test:
     runs-on: ubuntu-latest
@@ -41,6 +41,20 @@ jobs:
         run: python -m pip install -e ".[dev]"
       - name: Test
         run: python -m pytest -q
+
+  evaluation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - name: Install
+        run: python -m pip install -e .
+      - name: Verify held-out report
+        run: python evaluation/run.py --check
 
   package:
     runs-on: ubuntu-latest
@@ -62,3 +76,4 @@ jobs:
           python -m pip install --force-reinstall dist/*.whl
           darija --version
           darija translit "3lach bghiti daba"
+          darija arabizi "علاش بغيتي دبا"

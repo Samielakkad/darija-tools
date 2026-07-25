@@ -1,0 +1,30 @@
+{"id":"common-01","category":"common phrase","input":"wach nta hna","expected":"واش نتا هنا"}
+{"id":"common-02","category":"common phrase","input":"labas 3lik","expected":"لاباس عليك"}
+{"id":"common-03","category":"common phrase","input":"safi bslama","expected":"صافي بسلامة"}
+{"id":"common-04","category":"common phrase","input":"chokran bezzaf","expected":"شكرا بزاف"}
+{"id":"common-05","category":"common phrase","input":"bghit 9hwa","expected":"بغيت قهوة"}
+{"id":"common-06","category":"common phrase","input":"hadchi mzyan","expected":"هادشي مزيان"}
+{"id":"loanword-01","category":"code switch","input":"fin taxi","expected":"فين taxi","keep_loanwords":true}
+{"id":"loanword-02","category":"code switch","input":"bghit wifi","expected":"بغيت wifi","keep_loanwords":true}
+{"id":"question-01","category":"question","input":"chnou hadchi","expected":"شنو هادشي"}
+{"id":"loanword-03","category":"code switch","input":"3andek telephone","expected":"عندك telephone","keep_loanwords":true}
+{"id":"description-01","category":"description","input":"meskina zwina","expected":"مسكينة زوينة"}
+{"id":"request-01","category":"request","input":"sme3 sahbi","expected":"سمع صاحبي"}
+{"id":"loanword-04","category":"code switch","input":"wach bghiti cafe","expected":"واش بغيتي cafe","keep_loanwords":true}
+{"id":"time-01","category":"time","input":"hna daba","expected":"هنا دبا"}
+{"id":"family-01","category":"noun phrase","input":"weld w bent","expected":"ولد و بنت"}
+{"id":"request-02","category":"request","input":"3ti l bent","expected":"عطي ل بنت"}
+{"id":"loanword-05","category":"code switch","input":"bghyt pizza","expected":"بغيت pizza","keep_loanwords":true}
+{"id":"loanword-06","category":"code switch","input":"qahwa wla cafe","expected":"قهوة ولا cafe","keep_loanwords":true}
+{"id":"question-02","category":"question","input":"kifach ndir","expected":"كيفاش ندير"}
+{"id":"question-03","category":"question","input":"3lach la","expected":"علاش لا"}
+{"id":"fallback-01","category":"rule fallback","input":"ana f casa","expected":"انا ف كاسا"}
+{"id":"fallback-02","category":"rule fallback","input":"nta m3aya","expected":"نتا معايا"}
+{"id":"ending-01","category":"word ending","input":"khdma mzyana","expected":"خدمة مزيانة"}
+{"id":"request-03","category":"request","input":"3afak 3tini lma","expected":"عفاك عطيني الما"}
+{"id":"time-02","category":"time","input":"nchofk ghdda","expected":"نشوفك غدا"}
+{"id":"apology-01","category":"common phrase","input":"sm7 lia","expected":"سمح ليا"}
+{"id":"future-01","category":"verb phrase","input":"daba nji","expected":"دبا نجي"}
+{"id":"negation-01","category":"negation","input":"ma3reftch","expected":"معرفتش"}
+{"id":"direction-01","category":"direction","input":"sir ldar","expected":"سير للدار"}
+{"id":"future-02","category":"verb phrase","input":"wakha nchouf","expected":"واخا نشوف"}
