@@ -4,8 +4,12 @@ All notable changes are documented here. The project follows Semantic Versioning
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-07-25
+
 ### Added
 
+- Arabic-to-Arabizi transliteration through `to_arabizi()` and `darija arabizi`.
+- A versioned 30-phrase evaluation set, reproducible accuracy report, and CI check.
 - Trusted PyPI publishing workflow with separated build/publish privileges,
   protected-environment support, and package attestations.
 - Package metadata validation and wheel smoke tests in CI.
@@ -23,5 +27,6 @@ All notable changes are documented here. The project follows Semantic Versioning
 - Dependency-free `darija` command-line interface.
 - Test matrix for Python 3.9 through 3.13.
 
-[Unreleased]: https://github.com/Samielakkad/darija-tools/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/Samielakkad/darija-tools/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/Samielakkad/darija-tools/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/Samielakkad/darija-tools/releases/tag/v0.1.0

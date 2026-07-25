@@ -12,6 +12,7 @@ from darija_tools.cli import main
         (["normalize", "  دار\t دار  ", "--collapse-whitespace"], "دار دار\n"),
         (["translit", "bghit taxi", "--keep-loanwords"], "بغيت taxi\n"),
         (["translit", "l3am 2026"], "لعام 2026\n"),
+        (["arabizi", "علاش بغيتي دبا"], "3lach bghiti daba\n"),
     ],
 )
 def test_cli_exposes_library_options(argv, expected, capsys):

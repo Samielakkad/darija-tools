@@ -8,8 +8,9 @@ Contributions should make a real Darija NLP workflow more accurate, transparent,
 git clone https://github.com/Samielakkad/darija-tools
 cd darija-tools
 python -m pip install -e ".[dev]"
-python -m ruff check src tests
+python -m ruff check src tests evaluation
 python -m pytest -q
+python evaluation/run.py --check
 python -m build
 python -m twine check dist/*
 ```
@@ -24,6 +25,10 @@ Lexicon and rule changes must include:
 - no copied dataset content unless its license permits redistribution.
 
 Keep additions focused. A small, reviewable batch with evidence is preferred over a large unexplained word dump.
+
+The versioned evaluation set is not a second training lexicon. Do not tune a rule
+against its hidden failures and then report the same set as untouched. Proposed
+expected-value changes need a language justification in the pull request.
 
 ## Pull requests
 

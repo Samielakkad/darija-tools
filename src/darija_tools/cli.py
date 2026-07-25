@@ -5,7 +5,7 @@ import argparse
 import sys
 
 from . import __version__
-from .arabizi import to_arabic
+from .arabizi import to_arabic, to_arabizi
 from .normalize import normalize
 
 
@@ -39,6 +39,9 @@ def main(argv: list | None = None) -> int:
         help="preserve curated French and English loanwords in Latin script",
     )
 
+    p_rev = sub.add_parser("arabizi", help="Arabic script -> canonical Arabizi")
+    p_rev.add_argument("text", nargs="?", help="text (reads stdin if omitted)")
+
     args = parser.parse_args(argv)
     text = args.text if args.text is not None else sys.stdin.read().rstrip("\n")
 
@@ -50,8 +53,10 @@ def main(argv: list | None = None) -> int:
                 collapse_whitespace=args.collapse_whitespace,
             )
         )
-    else:  # translit
+    elif args.command == "translit":
         print(to_arabic(text, keep_loanwords=args.keep_loanwords))
+    else:  # arabizi
+        print(to_arabizi(text))
     return 0
 
 
