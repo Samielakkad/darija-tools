@@ -9,6 +9,20 @@ from .arabizi import to_arabic, to_arabizi
 from .normalize import normalize
 
 
+def _print_text(value: str) -> None:
+    """Print Unicode text even when Windows starts with a legacy code page."""
+    encoding = getattr(sys.stdout, "encoding", None)
+    if encoding is not None:
+        try:
+            value.encode(encoding)
+        except UnicodeEncodeError:
+            reconfigure = getattr(sys.stdout, "reconfigure", None)
+            if reconfigure is None:
+                raise
+            reconfigure(encoding="utf-8")
+    print(value)
+
+
 def main(argv: list | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="darija", description="Moroccan Darija text tools."
@@ -46,7 +60,7 @@ def main(argv: list | None = None) -> int:
     text = args.text if args.text is not None else sys.stdin.read().rstrip("\n")
 
     if args.command == "normalize":
-        print(
+        _print_text(
             normalize(
                 text,
                 normalize_digits=args.normalize_digits,
@@ -54,9 +68,9 @@ def main(argv: list | None = None) -> int:
             )
         )
     elif args.command == "translit":
-        print(to_arabic(text, keep_loanwords=args.keep_loanwords))
+        _print_text(to_arabic(text, keep_loanwords=args.keep_loanwords))
     else:  # arabizi
-        print(to_arabizi(text))
+        _print_text(to_arabizi(text))
     return 0
 
 

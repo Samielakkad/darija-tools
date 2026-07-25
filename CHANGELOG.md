@@ -4,6 +4,14 @@ All notable changes are documented here. The project follows Semantic Versioning
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-07-26
+
+### Fixed
+
+- Configure legacy Windows terminal output as UTF-8 before printing Arabic,
+  preventing the `darija translit` command from failing under code pages such
+  as Windows-1252.
+
 ## [0.2.0] - 2026-07-25
 
 ### Added
@@ -27,6 +35,7 @@ All notable changes are documented here. The project follows Semantic Versioning
 - Dependency-free `darija` command-line interface.
 - Test matrix for Python 3.9 through 3.13.
 
-[Unreleased]: https://github.com/Samielakkad/darija-tools/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/Samielakkad/darija-tools/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/Samielakkad/darija-tools/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/Samielakkad/darija-tools/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/Samielakkad/darija-tools/releases/tag/v0.1.0
