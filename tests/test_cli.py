@@ -1,4 +1,6 @@
-from io import StringIO
+import os
+import sys
+from io import BytesIO, StringIO, TextIOWrapper
 
 import pytest
 
@@ -47,3 +49,15 @@ def test_cli_options_work_with_stdin(monkeypatch, capsys):
     monkeypatch.setattr("sys.stdin", StringIO("bghit taxi\n"))
     assert main(["translit", "--keep-loanwords"]) == 0
     assert capsys.readouterr().out == "بغيت taxi\n"
+
+
+def test_cli_switches_legacy_windows_stdout_to_utf8(monkeypatch):
+    raw_output = BytesIO()
+    legacy_stdout = TextIOWrapper(raw_output, encoding="cp1252")
+    monkeypatch.setattr(sys, "stdout", legacy_stdout)
+
+    assert main(["translit", "3lach bghiti daba"]) == 0
+    legacy_stdout.flush()
+
+    assert legacy_stdout.encoding == "utf-8"
+    assert raw_output.getvalue().decode("utf-8") == f"علاش بغيتي دبا{os.linesep}"
